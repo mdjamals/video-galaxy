@@ -4,7 +4,8 @@ import { router } from 'lit-element-router';
 import { LionButton } from '@lion/button';
 
 import HeaderElement from "./src/components/app/header-element";
-import { MainWrapperElement } from "./src/components/app/main-wrapper-element";
+import "./src/components/app/nav-link-element";
+import "./src/components/app/main-wrapper-element";
 
 /**
  * An example element.
@@ -63,15 +64,19 @@ export class AppRoot extends router(LitElement) {
   render() {
     return html`
       <header-element></header-element>
+            <nav-link href="/">Home</nav-link>
+            <nav-link href="/info">Info</nav-link>
+            <nav-link href="/info?data=12345">Info?data=12345</nav-link>
+            <nav-link href="/user/14">user/14</nav-link>
       <main-wrapper active-route=${this.route}>
         <h1 route="home">
-          <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
+          <!-- <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
             Click Me!
-          </lion-button>
+          </lion-button> -->
         </h1>
         <h1 route="info">Info ${this.query.data}</h1>
         <h1 route="user">User ${this.params.id}</h1>
-        <h1 route="not-found">Not Found</h1>
+        <h1 route="not-found">Not Found *</h1>
       </main-wrapper>
     `;
   }

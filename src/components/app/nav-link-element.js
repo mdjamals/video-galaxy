@@ -19,6 +19,7 @@ export class NavLinkElement extends navigator(LitElement) {
     super();
     this.href = "";
   }
+  
   render() {
     return html`
       <a href="${this.href}" @click="${this.linkClick}">
@@ -26,6 +27,7 @@ export class NavLinkElement extends navigator(LitElement) {
       </a>
     `;
   }
+
   linkClick(event) {
     event.preventDefault();
     this.navigate(this.href);

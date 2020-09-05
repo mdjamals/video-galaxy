@@ -72,7 +72,8 @@ export default class HeaderElement extends LitElement {
             <nav-link href="/info?data=12345">Info?data=12345</nav-link>
             <nav-link href="/user/14">user/14</nav-link>
         </div>
-        <span @click="${this.openDrawer}">&#9776; open</span>
+        
+        <span class="menu" @click="${this.openDrawer}">&#9776; open</span>
         `;
     }
 }
