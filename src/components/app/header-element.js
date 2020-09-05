@@ -3,7 +3,8 @@ import { NavLinkElement } from "./nav-link-element";
 
 export default class HeaderElement extends LitElement {
 
-    static styles = css`
+    static get styles() {
+        return css`
     :host {
         display: block;
     }
@@ -52,6 +53,7 @@ export default class HeaderElement extends LitElement {
         .sidenav a {font-size: 18px;}
     }
     `;
+    }
 
     openDrawer(e) {
         this.shadowRoot.getElementById('drawer').style.width = "250px";
@@ -60,16 +62,15 @@ export default class HeaderElement extends LitElement {
 
     closeDrawer(e) {
         this.shadowRoot.getElementById('drawer').style.width = "0";
-        e.preventDefault();
     }
 
     render() {
         return html`
-        <div id="drawer" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" @click="${this.closeDrawer}">&times;</a>
+        <div id="drawer" class="sidenav"  @click="${this.closeDrawer}">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
             <nav-link href="/">Home</nav-link>
             <nav-link href="/info">Info</nav-link>
-            <nav-link href="/info?data=12345">Info?data=12345</nav-link>
+            <nav-link href="/info?data=12345" >Info?data=12345</nav-link>
             <nav-link href="/user/14">user/14</nav-link>
         </div>
         

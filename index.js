@@ -64,10 +64,6 @@ export class AppRoot extends router(LitElement) {
   render() {
     return html`
       <header-element></header-element>
-            <nav-link href="/">Home</nav-link>
-            <nav-link href="/info">Info</nav-link>
-            <nav-link href="/info?data=12345">Info?data=12345</nav-link>
-            <nav-link href="/user/14">user/14</nav-link>
       <main-wrapper active-route=${this.route}>
         <h1 route="home">
           <!-- <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
