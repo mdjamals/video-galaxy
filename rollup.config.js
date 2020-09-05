@@ -20,8 +20,6 @@ import copy from 'rollup-plugin-copy';
 
 const copyConfig = {
   targets: [
-    /*{ src: 'node_modules/@webcomponents', dest: 'build/node_modules' },
-    { src: 'node_modules/@lion', dest: 'build/node_modules' },*/
     { src: 'index.html', dest: 'dist' },
   ],
 };

@@ -1,5 +1,10 @@
 import { LitElement, html, css } from 'lit-element';
 import '@lion/input/lion-input.js';
+import { router } from 'lit-element-router';
+import { LionButton } from '@lion/button';
+
+import HeaderElement from "./src/components/app/header-element";
+import { MainWrapperElement } from "./src/components/app/main-wrapper-element";
 
 /**
  * An example element.
@@ -7,62 +12,69 @@ import '@lion/input/lion-input.js';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class MyElement extends LitElement {
-  static get styles() {
-    return css`
-      :host {
-        display: block;
-        border: solid 1px gray;
-        padding: 16px;
-        max-width: 800px;
-      }
-    `;
-  }
-
+export class AppRoot extends router(LitElement) {
   static get properties() {
     return {
-      /**
-       * The name to say "Hello" to.
-       */
-      name: { type: String },
-
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: { type: Number },
+      route: { type: String },
+      params: { type: Object },
+      query: { type: Object },
+      data: { type: Object }
     };
+  }
+
+  static get routes() {
+    return [
+      {
+        name: "home",
+        pattern: "",
+        data: { title: "Home" }
+      },
+      {
+        name: "info",
+        pattern: "info"
+      },
+      {
+        name: "user",
+        pattern: "user/:id"
+      },
+      {
+        name: "not-found",
+        pattern: "*"
+      }
+    ];
   }
 
   constructor() {
     super();
-    this.name = 'World';
-    this.count = 0;
+    this.route = "";
+    this.params = {};
+    this.query = {};
+    this.data = {};
+  }
+
+  router(route, params, query, data) {
+    this.route = route;
+    this.params = params;
+    this.query = query;
+    this.data = data;
+    console.log(route, params, query, data);
   }
 
   render() {
     return html`
-      <h1>Hello, ${this.name}!</h1>
-      <lion-input>
-        <label slot="label">Label</label>
-        <div slot="help-text">
-          Help text using <a href="https://example.com/" target="_blank">html</a>
-        </div>
-      </lion-input>
-
-      <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
-          Click | Space | Enter me and see log
-      </lion-button>
-
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
-      <slot></slot>
+      <header-element></header-element>
+      <main-wrapper active-route=${this.route}>
+        <h1 route="home">
+          <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
+            Click Me!
+          </lion-button>
+        </h1>
+        <h1 route="info">Info ${this.query.data}</h1>
+        <h1 route="user">User ${this.params.id}</h1>
+        <h1 route="not-found">Not Found</h1>
+      </main-wrapper>
     `;
-  }
-
-  _onClick() {
-    this.count++;
   }
 }
 
-window.customElements.define('my-element', MyElement);
+window.customElements.define('app-root', AppRoot);
