@@ -1,4 +1,4 @@
-import {LitElement, html, css} from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import '@lion/input/lion-input.js';
 
 /**
@@ -24,12 +24,12 @@ export class MyElement extends LitElement {
       /**
        * The name to say "Hello" to.
        */
-      name: {type: String},
+      name: { type: String },
 
       /**
        * The number of times the button has been clicked.
        */
-      count: {type: Number},
+      count: { type: Number },
     };
   }
 
@@ -43,11 +43,16 @@ export class MyElement extends LitElement {
     return html`
       <h1>Hello, ${this.name}!</h1>
       <lion-input>
-  <label slot="label">Label</label>
-  <div slot="help-text">
-    Help text using <a href="https://example.com/" target="_blank">html</a>
-  </div>
-</lion-input>
+        <label slot="label">Label</label>
+        <div slot="help-text">
+          Help text using <a href="https://example.com/" target="_blank">html</a>
+        </div>
+      </lion-input>
+
+      <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
+          Click | Space | Enter me and see log
+      </lion-button>
+
       <button @click=${this._onClick} part="button">
         Click Count: ${this.count}
       </button>

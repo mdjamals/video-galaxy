@@ -13,14 +13,23 @@
  */
 
 import filesize from 'rollup-plugin-filesize';
-import {terser} from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
+import copy from 'rollup-plugin-copy';
+
+const copyConfig = {
+  targets: [
+    /*{ src: 'node_modules/@webcomponents', dest: 'build/node_modules' },
+    { src: 'node_modules/@lion', dest: 'build/node_modules' },*/
+    { src: 'index.html', dest: 'dist' },
+  ],
+};
 
 export default {
-  input: 'my-element.js',
+  input: 'index.js',
   output: {
-    file: 'my-element.bundled.js',
+    dir: 'dist',
     format: 'esm',
   },
   onwarn(warning) {
@@ -29,7 +38,8 @@ export default {
     }
   },
   plugins: [
-    replace({'Reflect.decorate': 'undefined'}),
+    replace({ 'Reflect.decorate': 'undefined' }),
+    copy(copyConfig),
     resolve(),
     terser({
       module: true,
