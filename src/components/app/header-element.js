@@ -1,10 +1,15 @@
 import { LitElement, html, css } from 'lit-element';
 import { NavLinkElement } from "./nav-link-element";
+import globalCss from '../../css/style-module';
+import { LionInput } from "@lion/input";
+import AppLogoElement from './app-logo-element';
 
 export default class HeaderElement extends LitElement {
 
     static get styles() {
-        return css`
+        return [
+            globalCss,
+            css`
             :host {
                 display: block;
             }
@@ -16,7 +21,7 @@ export default class HeaderElement extends LitElement {
                 z-index: 1;
                 top: 0;
                 left: 0;
-                background-color: #111;
+                background-color: var(--orange-bg-color);
                 overflow-x: hidden;
                 transition: 0.5s;
                 padding-top: 60px;
@@ -41,23 +46,47 @@ export default class HeaderElement extends LitElement {
                 right: 25px;
                 font-size: 36px;
                 margin-left: 50px;
+                color: #fff;
             }
 
             nav {
                 padding: 6px;
                 background-color: #474747;
+                display: flex;
+                align-items: center;
             }
 
             .menu {
                 font-size:30px;
                 cursor:pointer;
+                color: #fff;
+            }
+
+            .logo {
+                margin-left: 10px;
+            }
+            .navbar {
+                position: sticky;
+                top: 0;
+            }
+            .navbar-brand {
+                display: flex;
+                width: max-content;
+                text-decoration: none;
+            }
+
+            .navbar-brand .title {
+                font: 1.4em Impact;
+                text-decoration: none;
+                color: var(--orange-bg-color);
+                margin-left: 8px;
             }
 
             @media screen and (max-height: 450px) {
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
             }
-        `;
+        `];
     }
 
     openDrawer(e) {
@@ -73,15 +102,24 @@ export default class HeaderElement extends LitElement {
         return html`
             <div id="drawer" class="sidenav"  @click="${this.closeDrawer}">
                 <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <nav-link href="/">Home</nav-link>
-                <nav-link href="/info">Info</nav-link>
-                <nav-link href="/info?data=12345" >Info?data=12345</nav-link>
-                <nav-link href="/user/14">user/14</nav-link>
+
+                <ul>
+                    <li><nav-link href="/">Home</nav-link></li>
+                    <li><nav-link href="/subscriptions">Subscriptions</nav-link></li>
+                    <li><nav-link href="/movies" >Movies</nav-link></li>
+                    <li><nav-link href="/learning">Learning</nav-link></li>
+                </ul>
             </div>
             
-            <nav class="">
-                <span class="menu" @click="${this.openDrawer}">&#9776; open</span>
-                <a class="navbar-brand" href="#">Navbar</a>
+            <nav class="navbar">
+                <span class="menu" @click="${this.openDrawer}">&#9776;</span>
+                <a class="navbar-brand" href="#">
+                    <app-logo-element class="logo"></app-logo-element>
+                    <span class="title">Video Galaxy</span>
+                </a>
+                <lion-input>
+                    <div slot="suffix"><i class="fa fa-search"></i></div>
+                </lion-input>
             </nav>
             
         `;

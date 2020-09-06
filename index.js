@@ -31,12 +31,16 @@ export class AppRoot extends router(LitElement) {
         data: { title: "Home" }
       },
       {
-        name: "info",
-        pattern: "info"
+        name: "subscriptions",
+        pattern: "subscriptions"
       },
       {
-        name: "user",
-        pattern: "user/:id"
+        name: "movies",
+        pattern: "movies"
+      },
+      {
+        name: "learning",
+        pattern: "learning"
       },
       {
         name: "not-found",
@@ -66,13 +70,11 @@ export class AppRoot extends router(LitElement) {
       <header-element></header-element>
       <main-wrapper active-route=${this.route}>
         <h1 route="home">
-          <!-- <lion-button @click="${ev => console.log('clicked/spaced/entered', ev)}">
-            Click Me!
-          </lion-button> -->
+          home
         </h1>
-        <h1 route="info">Info ${this.query.data}</h1>
-        <h1 route="user">User ${this.params.id}</h1>
-        <h1 route="not-found">Not Found *</h1>
+        <h1 route="subscriptions">subscriptions</h1>
+        <h1 route="movies">movies</h1>
+        <h1 route="learning">learning</h1>
       </main-wrapper>
     `;
   }
