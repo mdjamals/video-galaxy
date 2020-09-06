@@ -21,6 +21,8 @@ import copy from 'rollup-plugin-copy';
 const copyConfig = {
   targets: [
     { src: 'index.html', dest: 'dist' },
+    { src: 'node_modules/@fortawesome/fontawesome-free/sprites/solid.svg', dest: 'dist/node_modules/@fortawesome/fontawesome-free/sprites'},
+    { src: 'node_modules/@fortawesome/fontawesome-free/sprites/regular.svg', dest: 'dist/node_modules/@fortawesome/fontawesome-free/sprites'}
   ],
 };
 

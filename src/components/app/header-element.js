@@ -14,6 +14,8 @@ export default class HeaderElement extends LitElement {
             css`
             :host {
                 display: block;
+                position: sticky;
+                top: 0;
             }
 
             .sidenav {
@@ -31,8 +33,7 @@ export default class HeaderElement extends LitElement {
 
             .sidenav ul {
                 list-style: none;
-                display: flex;
-                flex-direction: column;
+                min-width: 250px;
             }
 
             .sidenav ul li{
@@ -82,10 +83,7 @@ export default class HeaderElement extends LitElement {
             .logo {
                 margin-left: 10px;
             }
-            .navbar {
-                position: sticky;
-                top: 0;
-            }
+
             .navbar-brand {
                 display: flex;
                 width: max-content;
@@ -152,10 +150,9 @@ export default class HeaderElement extends LitElement {
                     <span class="title">Video Galaxy</span>
                 </a>
                 <lion-input>
-                    <div slot="suffix"><i class="fa fa-search"></i></div>
+                    <div slot="suffix"><fa-icon class="fas fa-search icon" color="#ffffff" size="2em"></fa-icon></div>
                 </lion-input>
             </nav>
-            
         `;
     }
 }

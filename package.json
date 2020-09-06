@@ -22,7 +22,7 @@
     "test:update-snapshots": "karma start karma.conf.cjs --update-snapshots",
     "test:prune-snapshots": "karma start karma.conf.cjs --prune-snapshots",
     "build:modern": "rimraf build-modern && rollup -c rollup.config.js",
-    "build:deploy": "npm run build:modern",
+    "build": "npm run build:modern",
     "deploy": "git subtree push --prefix dist origin gh-pages",
     "serve:build": "cd dist && es-dev-server --app-index=index.html --compatibility=none",
     "checksize": "rollup -c ; cat my-element.bundled.js | gzip -9 | wc -c ; rm my-element.bundled.js"
@@ -40,7 +40,8 @@
     "fa-icons": "^0.2.0",
     "lit-element": "^2.3.1",
     "lit-element-router": "^2.0.3",
-    "rollup-plugin-copy": "^3.3.0"
+    "rollup-plugin-copy": "^3.3.0",
+    "singleton-manager": "^1.1.2"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
