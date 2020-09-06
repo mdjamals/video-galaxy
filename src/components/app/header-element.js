@@ -2,6 +2,8 @@ import { LitElement, html, css } from 'lit-element';
 import { NavLinkElement } from "./nav-link-element";
 import globalCss from '../../css/style-module';
 import { LionInput } from "@lion/input";
+import 'fa-icons';
+
 import AppLogoElement from './app-logo-element';
 
 export default class HeaderElement extends LitElement {
@@ -25,6 +27,21 @@ export default class HeaderElement extends LitElement {
                 overflow-x: hidden;
                 transition: 0.5s;
                 padding-top: 60px;
+            }
+
+            .sidenav ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .sidenav ul li{
+                padding: 10px;
+            }
+
+            .sidenav .icon {
+                vertical-align: middle;
+                margin-right: 6px;
             }
 
             .sidenav a {
@@ -75,6 +92,7 @@ export default class HeaderElement extends LitElement {
                 text-decoration: none;
             }
 
+            
             .navbar-brand .title {
                 font: 1.4em Impact;
                 text-decoration: none;
@@ -104,10 +122,26 @@ export default class HeaderElement extends LitElement {
                 <a href="javascript:void(0)" class="closebtn">&times;</a>
 
                 <ul>
-                    <li><nav-link href="/">Home</nav-link></li>
-                    <li><nav-link href="/subscriptions">Subscriptions</nav-link></li>
-                    <li><nav-link href="/movies" >Movies</nav-link></li>
-                    <li><nav-link href="/learning">Learning</nav-link></li>
+                    <li>
+                        <nav-link href="/">
+                          <fa-icon class="fas fa-home icon" color="#ffffff" size="2em"></fa-icon>Home
+                        </nav-link>
+                    </li>
+                    <li>
+                        <nav-link href="/subscriptions">
+                            <fa-icon class="far fa-bell icon" color="#ffffff" size="2em"></fa-icon>Subscriptions
+                        </nav-link>
+                    </li>
+                    <li>
+                        <nav-link href="/movies">
+                        <fa-icon class="fas fa-film icon" color="#ffffff" size="2em"></fa-icon>Movies
+                        </nav-link>
+                    </li>
+                    <li>
+                        <nav-link href="/learning">
+                        <fa-icon class="fas fa-graduation-cap icon" color="#ffffff" size="2em"></fa-icon>Learning
+                        </nav-link>
+                    </li>
                 </ul>
             </div>
             

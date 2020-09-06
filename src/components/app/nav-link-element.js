@@ -12,6 +12,8 @@ export class NavLinkElement extends navigator(LitElement) {
     return css`
       a {
         margin: 5px;
+        text-decoration: none;
+        color: #fff;
       }
     `;
   }
