@@ -3,11 +3,8 @@ import { singletonManager } from "singleton-manager";
 import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../config";
 
 export default class RouteDataResolver {
-    #data;
-    #ytApi;
-
     constructor() {
-        this.#ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
+        this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
     /**
@@ -15,7 +12,7 @@ export default class RouteDataResolver {
      * @param {String} route 
      */
     async getContents(route) { 
-        this.#data = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS[route]);
-        return this.#data;
+        this.data = await this.ytApi.loadContents(DEFAULT_CONTENTS_PARAMS[route]);
+        return this.data;
     }
 }

@@ -4,15 +4,12 @@ import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
 
 export default class SearchContentsElement extends LitElement {
-    #eventEmitter;
-    #data;
-    #ytApi;
 
     constructor() {
         super();
-        this.#eventEmitter = singletonManager.get(OBJECT_KEYS.Basic_Event_Emitter);
-        this.#eventEmitter.subscribe('start-search', this.search);
-        this.#ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
+        this.eventEmitter = singletonManager.get(OBJECT_KEYS.Basic_Event_Emitter);
+        this.eventEmitter.subscribe('start-search', this.search);
+        this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
     static get styles() {
@@ -27,7 +24,7 @@ export default class SearchContentsElement extends LitElement {
         const urlParams = new URLSearchParams(location.search);
         const query = urlParams.get('q');
 
-        this.#data = await this.#ytApi.loadContents({
+        this.data = await this.ytApi.loadContents({
             "part": [
               "snippet"
             ],
@@ -52,7 +49,7 @@ export default class SearchContentsElement extends LitElement {
     }
 
     render() {
-        return html`<video-grid-element snippet='${JSON.stringify(this.#data)}' heading='Search'></video-grid-element>`;
+        return html`<video-grid-element snippet='${JSON.stringify(this.data)}' heading='Search'></video-grid-element>`;
     }
 }
 customElements.define('search-contents-element', SearchContentsElement);

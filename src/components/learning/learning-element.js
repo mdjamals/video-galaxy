@@ -5,12 +5,9 @@ import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
 export default class LearningElement extends LitElement {
 
-    #learningData;
-    #ytApi;
-
     constructor() {
         super();
-        this.#ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
+        this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
     static get styles() {
@@ -22,12 +19,12 @@ export default class LearningElement extends LitElement {
     } 
 
     async connectedCallback() {
-         this.#learningData = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.learning);
+         this.learningData = await this.ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.learning);
          super.connectedCallback();
      }
 
     render() {
-        return html`<video-grid-element snippet='${JSON.stringify(this.#learningData)}' heading='Learning tutorials'></video-grid-element>`;
+        return html`<video-grid-element snippet='${JSON.stringify(this.learningData)}' heading='Learning tutorials'></video-grid-element>`;
     }
 }
 customElements.define('learning-element', LearningElement);

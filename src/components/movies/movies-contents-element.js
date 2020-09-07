@@ -4,13 +4,10 @@ import { singletonManager } from 'singleton-manager';
 import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
 export default class MoviesContentsElement extends LitElement {
-
-    #moviesData;
-    #ytApi;
-
+    
     constructor() {
         super();
-        this.#ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
+        this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
     static get styles() {
@@ -22,13 +19,13 @@ export default class MoviesContentsElement extends LitElement {
     } 
 
     async connectedCallback() {
-        this.#moviesData = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.movies);
+        this.moviesData = await this.ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.movies);
         super.connectedCallback();
     }
 
     render() {
-        console.log('render movies...', this.#moviesData);
-        return html`<video-grid-element snippet='${JSON.stringify(this.#moviesData)}' heading='Movies'></video-grid-element>`;
+        console.log('render movies...', this.moviesData);
+        return html`<video-grid-element snippet='${JSON.stringify(this.moviesData)}' heading='Movies'></video-grid-element>`;
     }
 }
 customElements.define('movies-contents-element', MoviesContentsElement);

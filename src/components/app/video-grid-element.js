@@ -63,7 +63,7 @@ export default class VideoGridElement extends LitElement {
 
     render() {
         console.log(`video snippets...`, this.snippet);
-        let { items } = this.snippet?.result;
+        let { items } = this.snippet.result;
         let templateResult = html`No contents to show!`;
 
         if(!!items) {

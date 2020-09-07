@@ -7,12 +7,9 @@ import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
 export default class HomeContentsElement extends LitElement {
 
-    #recommendedData;
-    #ytApi;
-
     constructor() {
         super();
-        this.#ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
+        this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
     static get properties() { 
@@ -31,13 +28,13 @@ export default class HomeContentsElement extends LitElement {
 
 
     async connectedCallback() {
-        this.#recommendedData = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.home);
+        this.recommendedData = await this.ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.home);
         super.connectedCallback();
     }
 
     render() {
-        console.log('render home...', this.#recommendedData);
-        return html`<video-grid-element snippet='${JSON.stringify(this.#recommendedData)}' heading='Pick for you'></video-grid-element>`;
+        console.log('render home...', this.recommendedData);
+        return html`<video-grid-element snippet='${JSON.stringify(this.recommendedData)}' heading='Pick for you'></video-grid-element>`;
     }
 }
 customElements.define('home-contents-element', HomeContentsElement);
