@@ -433,6 +433,9 @@ function Ge(t,e,i){if(!(this instanceof Ge)||We.has(this))throw new TypeError("c
         <slot></slot>
       </a>
     `}linkClick(t){t.preventDefault(),this.navigate(this.href)}}customElements.define("nav-link",ci);var li=Y`
+    html {
+        display: flex;
+    }
     :host {
         --orange-bg-color: #FF6200;
     }
@@ -579,6 +582,10 @@ function Ge(t,e,i){if(!(this instanceof Ge)||We.has(this))throw new TypeError("c
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
             }
+
+            @media screen and (max-width: 414px) and (orientation: portrait) {
+                
+            }
         `]}openDrawer(t){this.shadowRoot.getElementById("drawer").style.width="250px",t.preventDefault()}closeDrawer(t){this.shadowRoot.getElementById("drawer").style.width="0"}firstUpdated(){const t=new URLSearchParams(location.search).get("q");this.shadowRoot.getElementById("searchInput").value=t}searchClick(t){console.log("e => ",t),this.navigate("search?q="+this.shadowRoot.getElementById("searchInput").value),Fe.get(pi).emit("start-search")}render(){return j`
             <div id="drawer" class="sidenav"  @click="${this.closeDrawer}">
                 <a href="javascript:void(0)" class="closebtn">&times;</a>
@@ -644,6 +651,11 @@ const vi=(t,e)=>{const i=t.startNode.parentNode,s=void 0===e?t.endNode:e.startNo
                 font-weight: 600;
             }
 
+            a {
+                text-decoration: none;
+                color: #2b2b2b;
+            }
+
             .thumb-row {
                 display: flex;
                 flex-wrap: wrap;
@@ -682,13 +694,13 @@ const vi=(t,e)=>{const i=t.startNode.parentNode,s=void 0===e?t.endNode:e.startNo
                 ${this.heading}
                 </header>
                 <section class="thumb-row">
-                    ${ki(t,t=>t.id.videoId,(t,e)=>j`<div class="thumb">
+                    ${ki(t,t=>t.id.videoId,(t,e)=>j`<a class="thumb" target="_blank" href="https://www.youtube.com/watch?v=${t.id.videoId}">
                                     <section>
                                         <img alt="${t.snippet.title}" src="${t.snippet.thumbnails.medium.url}">
                                         <div class="title">${t.snippet.title}</div>
                                     </section>
                                     <div class="channelTitle">${t.snippet.channelTitle}</div>
-                            </div>
+                    </a>
                         `)}
                 </section>
             </section>`),e}});customElements.define("home-contents-element",class extends K{constructor(){super(),this.ytApi=Fe.get(di)}static get properties(){return{data:{type:Object}}}static get styles(){return Y`

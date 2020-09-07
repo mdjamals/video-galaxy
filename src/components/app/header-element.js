@@ -116,6 +116,10 @@ export default class HeaderElement extends navigator(LitElement) {
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
             }
+
+            @media screen and (max-width: 414px) and (orientation: portrait) {
+                
+            }
         `];
     }
 

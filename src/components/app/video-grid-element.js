@@ -27,6 +27,11 @@ export default class VideoGridElement extends LitElement {
                 font-weight: 600;
             }
 
+            a {
+                text-decoration: none;
+                color: #2b2b2b;
+            }
+
             .thumb-row {
                 display: flex;
                 flex-wrap: wrap;
@@ -74,13 +79,13 @@ export default class VideoGridElement extends LitElement {
                 </header>
                 <section class="thumb-row">
                     ${
-                        repeat(items, (item) => item.id.videoId, (item, index) => html`<div class="thumb">
+                        repeat(items, (item) => item.id.videoId, (item, index) => html`<a class="thumb" target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}">
                                     <section>
                                         <img alt="${item.snippet.title}" src="${item.snippet.thumbnails.medium.url}">
                                         <div class="title">${item.snippet.title}</div>
                                     </section>
                                     <div class="channelTitle">${item.snippet.channelTitle}</div>
-                            </div>
+                    </a>
                         `)
                     }
                 </section>
