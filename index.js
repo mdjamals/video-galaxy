@@ -29,6 +29,20 @@ export class AppRoot extends router(LitElement) {
       .container {
         padding:14px;
       }
+
+      footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        /* padding: 20px 30px; */
+        display: flex;
+        flex-direction: row;
+        background-color: #ccc;
+        opacity: 0.8;
+        padding-right: 20px;
+        justify-content: center;
+        padding: 20px 0;
+      }
     `;
   }
 
@@ -116,6 +130,7 @@ export class AppRoot extends router(LitElement) {
           }
         </main-wrapper>
     </div>
+    <footer>Application designed and developed by Roshan N</footer>
     `;
   }
 }
