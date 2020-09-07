@@ -2,7 +2,7 @@ import { LitElement, html, css } from "lit-element";
 import { singletonManager } from "singleton-manager";
 
 import VideoGridElement from "../app/video-grid-element";
-import { OBJECT_KEYS } from "../../data/config";
+import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
 
 export default class HomeContentsElement extends LitElement {
@@ -21,30 +21,17 @@ export default class HomeContentsElement extends LitElement {
         };
     }
 
-    static styles = css`
-        :host {
-            display: block;
-        }
-    `;
+    static get styles() {
+        return css`
+            :host {
+                display: block;
+            }
+        `;
+    } 
 
-    // async firstUpdated() {
-    //     this.#recommendedData = await this.#ytApi.loadContents({
-    //         "part": [
-    //             "snippet"
-    //         ],
-    //         "maxResults": 20,
-    //         "safeSearch": "strict"
-    //     });
-    //     super.firstUpdated();
-    // }
+
     async connectedCallback() {
-        this.#recommendedData = await this.#ytApi.loadContents({
-            "part": [
-              "snippet"
-            ],
-            "maxResults": 20,
-            "safeSearch": "strict"
-        });
+        this.#recommendedData = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.home);
         super.connectedCallback();
     }
 

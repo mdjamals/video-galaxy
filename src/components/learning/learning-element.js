@@ -3,9 +3,9 @@ import { singletonManager } from 'singleton-manager';
 
 import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
-export default class MoviesContentsElement extends LitElement {
+export default class LearningElement extends LitElement {
 
-    #moviesData;
+    #learningData;
     #ytApi;
 
     constructor() {
@@ -22,13 +22,12 @@ export default class MoviesContentsElement extends LitElement {
     } 
 
     async connectedCallback() {
-        this.#moviesData = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.movies);
-        super.connectedCallback();
-    }
+         this.#learningData = await this.#ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.learning);
+         super.connectedCallback();
+     }
 
     render() {
-        console.log('render movies...', this.#moviesData);
-        return html`<video-grid-element snippet='${JSON.stringify(this.#moviesData)}' heading='Movies'></video-grid-element>`;
+        return html`<video-grid-element snippet='${JSON.stringify(this.#learningData)}' heading='Learning tutorials'></video-grid-element>`;
     }
 }
-customElements.define('movies-contents-element', MoviesContentsElement);
+customElements.define('learning-element', LearningElement);

@@ -2,11 +2,15 @@ import { LitElement, html, css } from 'lit-element';
 import { NavLinkElement } from "./nav-link-element";
 import globalCss from '../../css/style-module';
 import { LionInput } from "@lion/input";
+import { LionButton } from '@lion/button';
+import { navigator } from "lit-element-router";
+import { singletonManager } from 'singleton-manager';
+import { OBJECT_KEYS } from "../../data/config";
 import 'fa-icons';
 
 import AppLogoElement from './app-logo-element';
 
-export default class HeaderElement extends LitElement {
+export default class HeaderElement extends navigator(LitElement) {
 
     static get styles() {
         return [
@@ -98,6 +102,16 @@ export default class HeaderElement extends LitElement {
                 margin-left: 8px;
             }
 
+            .lion-input-search {
+                width: 50%;
+                margin-left: 20px;
+            }
+
+            .lion-search-btn {
+                margin-left: 10px;
+                cursor: pointer;
+            }
+
             @media screen and (max-height: 450px) {
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
@@ -112,6 +126,19 @@ export default class HeaderElement extends LitElement {
 
     closeDrawer(e) {
         this.shadowRoot.getElementById('drawer').style.width = "0";
+    }
+
+    firstUpdated() {
+        const urlParams = new URLSearchParams(location.search);
+        const query = urlParams.get('q');
+
+        this.shadowRoot.getElementById('searchInput').value = query;
+    }
+
+    searchClick(e) {
+        console.log("e => ", e);
+        this.navigate('search?q=' + this.shadowRoot.getElementById('searchInput').value);
+        singletonManager.get(OBJECT_KEYS.Basic_Event_Emitter).emit('start-search');
     }
 
     render() {
@@ -149,8 +176,10 @@ export default class HeaderElement extends LitElement {
                     <app-logo-element class="logo"></app-logo-element>
                     <span class="title">Video Galaxy</span>
                 </a>
-                <lion-input>
-                    <div slot="suffix"><fa-icon class="fas fa-search icon" color="#ffffff" size="2em"></fa-icon></div>
+                <lion-input id="searchInput" class="lion-input-search">
+                    <div slot="suffix" class="lion-search-btn">
+                        <lion-button @click=${this.searchClick}><fa-icon class="fas fa-search icon" color="#ffffff" size="2em"></fa-icon></lion-button>
+                    </div>
                 </lion-input>
             </nav>
         `;

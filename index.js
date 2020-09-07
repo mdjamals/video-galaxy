@@ -7,10 +7,13 @@ import { singletonManager } from 'singleton-manager';
 import HeaderElement from "./src/components/app/header-element";
 import HomeContentsElement from "./src/components/home/home-contents-element";
 import MoviesContentsElement from "./src/components/movies/movies-contents-element";
+import SearchContentsElement from './src/components/search/search-contents-element';
+import LearningElement from './src/components/learning/learning-element';
 import YtDialogueApi from "./src/data/api/ytube-api";
 import "./src/components/app/nav-link-element";
 import "./src/components/app/main-wrapper-element";
 import RouteDataResolver from './src/data/controllers/route-data-resolver';
+import BasicEventEmitter from './src/data/controllers/basic-event-emitter';
 import { OBJECT_KEYS } from "./src/data/config";
 
 /**
@@ -58,6 +61,10 @@ export class AppRoot extends router(LitElement) {
         pattern: "learning"
       },
       {
+        name: "search",
+        pattern: "search"
+      },
+      {
         name: "not-found",
         pattern: "*"
       }
@@ -72,6 +79,7 @@ export class AppRoot extends router(LitElement) {
   init() {
     singletonManager.set(OBJECT_KEYS.Youtube_Data_Api, new YtDialogueApi());
     singletonManager.set(OBJECT_KEYS.Route_Data_Resolver, new RouteDataResolver());
+    singletonManager.set(OBJECT_KEYS.Basic_Event_Emitter, new BasicEventEmitter());
 
     this.route = "";
     this.params = {};
@@ -100,7 +108,12 @@ export class AppRoot extends router(LitElement) {
           ${
             this.route === "movies" ? html`<movies-contents-element route="movies"></movies-contents-element>` : html ``
           }
-          <h1 route="learning">learning</h1>
+          ${
+            this.route === "learning" ? html`<learning-element route="learning"></learning-element>` : html ``
+          }
+          ${
+            this.route === "search" ? html`<search-contents-element route="search"></search-contents-element>` : html ``
+          }
         </main-wrapper>
     </div>
     `;

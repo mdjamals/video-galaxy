@@ -1,5 +1,6 @@
 import { LitElement, html, css, TemplateResult } from 'lit-element';
 import { singletonManager } from 'singleton-manager';
+import {repeat} from 'lit-html/directives/repeat.js';
 
 export default class VideoGridElement extends LitElement {
 
@@ -38,6 +39,9 @@ export default class VideoGridElement extends LitElement {
                 flex-direction: column;
                 max-width: 320px;
                 justify-content: space-between;
+                -webkit-box-shadow: 10px 10px 33px -12px rgba(0,0,0,0.75);
+                -moz-box-shadow: 10px 10px 33px -12px rgba(0,0,0,0.75);
+                box-shadow: 10px 10px 33px -12px rgba(0,0,0,0.75);
             }
 
             .thumb img {
@@ -48,16 +52,18 @@ export default class VideoGridElement extends LitElement {
             .thumb .title {
                 margin-right: 5px;
                 font-weight: 600;
+                padding: 0 10px;
             }
 
             .thumb .channelTitle {
                 font-size: 0.8em;
+                padding: 10px;
             }
     `};
 
     render() {
         console.log(`video snippets...`, this.snippet);
-        let { items } = this.snippet.result;
+        let { items } = this.snippet?.result;
         let templateResult = html`No contents to show!`;
 
         if(!!items) {
@@ -68,8 +74,7 @@ export default class VideoGridElement extends LitElement {
                 </header>
                 <section class="thumb-row">
                     ${
-                        items.map((item) => 
-                            html`<div class="thumb">
+                        repeat(items, (item) => item.id.videoId, (item, index) => html`<div class="thumb">
                                     <section>
                                         <img alt="${item.snippet.title}" src="${item.snippet.thumbnails.medium.url}">
                                         <div class="title">${item.snippet.title}</div>
