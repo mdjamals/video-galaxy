@@ -1,18 +1,24 @@
 import { LitElement, html, css } from "lit-element";
 import { singletonManager } from "singleton-manager";
 
-import VideoGridElement from "./video-grid-element";
+import VideoGridElement from "../app/video-grid-element";
 import { OBJECT_KEYS } from "../../data/config";
 
 
 export default class HomeContentsElement extends LitElement {
 
-    #snippetData;
+    #recommendedData;
     #ytApi;
 
     constructor() {
         super();
         this.#ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
+    }
+
+    static get properties() { 
+        return { 
+            data: { type: Object }
+        };
     }
 
     static styles = css`
@@ -21,19 +27,30 @@ export default class HomeContentsElement extends LitElement {
         }
     `;
 
+    // async firstUpdated() {
+    //     this.#recommendedData = await this.#ytApi.loadContents({
+    //         "part": [
+    //             "snippet"
+    //         ],
+    //         "maxResults": 20,
+    //         "safeSearch": "strict"
+    //     });
+    //     super.firstUpdated();
+    // }
     async connectedCallback() {
-        this.#snippetData = await this.#ytApi.loadContents();
+        this.#recommendedData = await this.#ytApi.loadContents({
+            "part": [
+              "snippet"
+            ],
+            "maxResults": 20,
+            "safeSearch": "strict"
+        });
         super.connectedCallback();
     }
 
-    async firstUpdated() {
-        // this.#snippetData = await this.#ytApi.loadContents();
-        // console.log('snippetdata', this.#snippetData);
-    }
-
     render() {
-        console.log('render...', this.#snippetData);
-        return html`<video-grid-element snippet='${JSON.stringify(this.#snippetData)}' heading='Recommended'></video-grid-element>`;
+        console.log('render home...', this.#recommendedData);
+        return html`<video-grid-element snippet='${JSON.stringify(this.#recommendedData)}' heading='Pick for you'></video-grid-element>`;
     }
 }
 customElements.define('home-contents-element', HomeContentsElement);

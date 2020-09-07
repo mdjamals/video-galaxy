@@ -31,13 +31,6 @@ export default class YtDialogueApi {
      */
     async loadContents(searchConfig) {
       await this.loadYoutubeApi();
-
-      return gapi.client.youtube.search.list({
-        "part": [
-          "snippet"
-        ],
-        "maxResults": 20,
-        "safeSearch": "strict"
-      });
+      return gapi.client.youtube.search.list(searchConfig);
     }
 }

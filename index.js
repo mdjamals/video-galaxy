@@ -6,9 +6,11 @@ import { singletonManager } from 'singleton-manager';
 
 import HeaderElement from "./src/components/app/header-element";
 import HomeContentsElement from "./src/components/home/home-contents-element";
+import MoviesContentsElement from "./src/components/movies/movies-contents-element";
 import YtDialogueApi from "./src/data/api/ytube-api";
 import "./src/components/app/nav-link-element";
 import "./src/components/app/main-wrapper-element";
+import RouteDataResolver from './src/data/controllers/route-data-resolver';
 import { OBJECT_KEYS } from "./src/data/config";
 
 /**
@@ -18,7 +20,7 @@ import { OBJECT_KEYS } from "./src/data/config";
  * @csspart button - The button
  */
 export class AppRoot extends router(LitElement) {
-
+  
   static get styles() { 
     return css`
       .container {
@@ -26,6 +28,7 @@ export class AppRoot extends router(LitElement) {
       }
     `;
   }
+
   static get properties() {
     return {
       route: { type: String },
@@ -63,16 +66,17 @@ export class AppRoot extends router(LitElement) {
 
   constructor() {
     super();
-    this.route = "";
-    this.params = {};
-    this.query = {};
-    this.data = {};
-
     this.init();
   }
 
   init() {
     singletonManager.set(OBJECT_KEYS.Youtube_Data_Api, new YtDialogueApi());
+    singletonManager.set(OBJECT_KEYS.Route_Data_Resolver, new RouteDataResolver());
+
+    this.route = "";
+    this.params = {};
+    this.query = {};
+    this.data = {};
   }
 
   router(route, params, query, data) {
@@ -80,7 +84,7 @@ export class AppRoot extends router(LitElement) {
     this.params = params;
     this.query = query;
     this.data = data;
-    console.log(route, params, query, data);
+    console.log('route activate..', route, params, query, data);
   }
 
   render() {
@@ -88,11 +92,14 @@ export class AppRoot extends router(LitElement) {
       <header-element></header-element>
       <div class="container">
         <main-wrapper active-route=${this.route}>
-          <h1 route="home">
-            <home-contents-element></home-contents-element>
-          </h1>
+          ${
+            this.route === "home" ? html`<home-contents-element route="home"></home-contents-element>` : html ``
+          }
+          
           <h1 route="subscriptions">subscriptions</h1>
-          <h1 route="movies">movies</h1>
+          ${
+            this.route === "movies" ? html`<movies-contents-element route="movies"></movies-contents-element>` : html ``
+          }
           <h1 route="learning">learning</h1>
         </main-wrapper>
     </div>
