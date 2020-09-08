@@ -1,4 +1,4 @@
-# LitElement JavaScript starter 
+# Video Galaxy App using LitElement 
 
 This project includes a sample component using LitElement with JavaScript.
 
