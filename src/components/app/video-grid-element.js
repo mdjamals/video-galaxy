@@ -2,12 +2,21 @@ import { LitElement, html, css, TemplateResult } from 'lit-element';
 import { singletonManager } from 'singleton-manager';
 import {repeat} from 'lit-html/directives/repeat.js';
 
+/**
+ * Element to render video thubnail grid
+ */
 export default class VideoGridElement extends LitElement {
 
+    /**
+     * Constructor
+     */
     constructor() {
         super();
     }
 
+    /**
+     * Returns element properties
+     */
     static get properties() { 
         return { 
             snippet: { type: Object },
@@ -15,6 +24,9 @@ export default class VideoGridElement extends LitElement {
         };
     }
 
+    /**
+     * Returns styles specifically related to this component
+     */
     static get styles() { 
         return css`
             :host {
@@ -64,8 +76,11 @@ export default class VideoGridElement extends LitElement {
                 font-size: 0.8em;
                 padding: 10px;
             }
-    `};
+    `}
 
+    /**
+     * Build component UI
+     */
     render() {
         console.log(`video snippets...`, this.snippet);
         let { items } = this.snippet.result;

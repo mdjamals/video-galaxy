@@ -1,8 +1,10 @@
 import { LitElement, html, css } from 'lit-element';
 import { singletonManager } from 'singleton-manager';
-import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
+import { OBJECT_KEYS } from "../../data/config";
 
-
+/**
+ * Components to show search result.
+ */
 export default class SearchContentsElement extends LitElement {
 
     constructor() {
@@ -12,6 +14,9 @@ export default class SearchContentsElement extends LitElement {
         this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
+    /**
+     * Returns styles specifically related to this component
+     */
     static get styles() {
         return css`
             :host {
@@ -20,6 +25,9 @@ export default class SearchContentsElement extends LitElement {
         `;
     }
 
+    /**
+     * Retrieve search result based on user input
+     */
     async requestData() {
         const urlParams = new URLSearchParams(location.search);
         const query = urlParams.get('q');
@@ -34,20 +42,26 @@ export default class SearchContentsElement extends LitElement {
         });
     }
 
-    async search() {
+    /**
+     * Search for video data and and update UI
+     */
+    search = async  () => {
         await this.requestData();
         this.requestUpdate();
     }
 
+    /**
+     * Component lifecycle event
+     * This will load data based on querystring parameter on page refresh
+     */
     async connectedCallback() {
         await this.requestData();
         super.connectedCallback();
     }
 
-    updated(changedProperties) { 
-        console.log('updated ')
-    }
-
+    /**
+     * Build component UI
+     */
     render() {
         return html`<video-grid-element snippet='${JSON.stringify(this.data)}' heading='Search'></video-grid-element>`;
     }

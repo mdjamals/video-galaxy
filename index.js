@@ -106,7 +106,6 @@ export class AppRoot extends router(LitElement) {
     this.params = params;
     this.query = query;
     this.data = data;
-    console.log('route activate..', route, params, query, data);
   }
 
   render() {

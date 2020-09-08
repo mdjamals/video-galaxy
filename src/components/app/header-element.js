@@ -11,7 +11,10 @@ import 'fa-icons';
 import AppLogoElement from './app-logo-element';
 
 export default class HeaderElement extends navigator(LitElement) {
-
+    
+    /**
+     * Returns styles specifically related to this component
+     */
     static get styles() {
         return [
             globalCss,
@@ -76,6 +79,7 @@ export default class HeaderElement extends navigator(LitElement) {
                 background-color: #474747;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
             }
 
             .menu {
@@ -117,21 +121,58 @@ export default class HeaderElement extends navigator(LitElement) {
                 .sidenav a {font-size: 18px;}
             }
 
-            @media screen and (max-width: 414px) and (orientation: portrait) {
-                
+            @media only screen and (min-width: 320px) and (max-width: 450px) {
+                .lion-input-search {
+                    margin-left: 0px;
+                    width: 100%;
+                    margin-top: 10px;
+                }
+
+                .navbar-brand .title {
+                    font: 1.2em Impact;
+                    text-decoration: none;
+                    color: var(--orange-bg-color);
+                    margin-left: 1px;
+                    width: 60px;
+                }
+
+                .logo {
+                    margin-left: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .input-group__container > .input-group__input ::slotted(.form-control) {
+                    flex: 1 1 auto;
+                    margin: 0px;
+                    font-size: 100%;
+                    width: 159px;
+                } 
             }
         `];
     }
 
+    /**
+     * Open side navigation bar
+     * @param {*} e Event object
+     */
     openDrawer(e) {
         this.shadowRoot.getElementById('drawer').style.width = "250px";
         e.preventDefault();
     }
 
+    /**
+     * Open side navigation bar
+     * @param {*} e Event Object
+     */
     closeDrawer(e) {
         this.shadowRoot.getElementById('drawer').style.width = "0";
     }
 
+    /**
+     * Component lifecycle method
+     */
     firstUpdated() {
         const urlParams = new URLSearchParams(location.search);
         const query = urlParams.get('q');
@@ -139,12 +180,18 @@ export default class HeaderElement extends navigator(LitElement) {
         this.shadowRoot.getElementById('searchInput').value = query;
     }
 
+    /**
+     * 
+     * @param {*} e Event Object
+     */
     searchClick(e) {
-        console.log("e => ", e);
         this.navigate('search?q=' + this.shadowRoot.getElementById('searchInput').value);
         singletonManager.get(OBJECT_KEYS.Basic_Event_Emitter).emit('start-search');
     }
 
+    /**
+     * Build component UI
+     */
     render() {
         return html`
             <div id="drawer" class="sidenav"  @click="${this.closeDrawer}">
@@ -156,11 +203,11 @@ export default class HeaderElement extends navigator(LitElement) {
                           <fa-icon class="fas fa-home icon" color="#ffffff" size="2em"></fa-icon>Home
                         </nav-link>
                     </li>
-                    <li>
+                    <!--<li>
                         <nav-link href="/subscriptions">
-                            <fa-icon class="far fa-bell icon" color="#ffffff" size="2em"></fa-icon>Subscriptions
+                            <fa-icon class="far fa-bell icon" color="#ffffff" size="2em"></fa-icon>Favorites
                         </nav-link>
-                    </li>
+                    </li>-->
                     <li>
                         <nav-link href="/movies">
                         <fa-icon class="fas fa-film icon" color="#ffffff" size="2em"></fa-icon>Movies

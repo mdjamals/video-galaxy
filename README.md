@@ -30,7 +30,7 @@ To run the dev server and open the project in a new browser tab:
 npm run serve
 ```
 
-There is a development HTML file located at `/dev/index.html` that you can view at http://localhost:8000/dev/index.html.
+There is a development HTML file located at `/index.html` that you can view at http://localhost:8000/index.html.
 
 ## Editing
 

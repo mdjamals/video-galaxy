@@ -4,7 +4,9 @@ import { singletonManager } from "singleton-manager";
 import VideoGridElement from "../app/video-grid-element";
 import { OBJECT_KEYS, DEFAULT_CONTENTS_PARAMS } from "../../data/config";
 
-
+/**
+ * Home element for landing page
+ */
 export default class HomeContentsElement extends LitElement {
 
     constructor() {
@@ -12,6 +14,9 @@ export default class HomeContentsElement extends LitElement {
         this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
+    /**
+     * Return object
+     */
     static get properties() { 
         return { 
             data: { type: Object }

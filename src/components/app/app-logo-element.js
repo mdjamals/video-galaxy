@@ -1,7 +1,13 @@
 import { LitElement, html, css } from 'lit-element';
 
+/**
+ * Application logo component
+ */
 export default class AppLogoElement extends LitElement {
 
+    /**
+     * Returns styles specifically related to this component
+     */
     static get styles() {
         return css`
             :host {

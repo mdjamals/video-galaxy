@@ -8,16 +8,23 @@ export default class YtDialogueApi {
       this.initGoogleApi();
     }
 
+    /**
+     * Initialize google api client
+     */
     initGoogleApi() {
       gapi.load("client");
       gapi.client.setApiKey(YT_API_CONFIG.apiKey);
     }
 
+    /**
+     * Api for communicating with youtube server
+     */
     async loadYoutubeApi() {
       if(!gapi.client.youtube) {
         await gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest");
       }
     }
+
     /**
      * Loading default contents from YouTube
      * @param searchConfig object containing search criteria

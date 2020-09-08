@@ -1,13 +1,29 @@
 import { LitElement, html, css } from "lit-element";
 import { navigator } from "lit-element-router";
 
+/**
+ * Link to provide navigation to specific route
+ */
 //@navigator
 export class NavLinkElement extends navigator(LitElement) {
+
+  constructor() {
+    super();
+    this.href = "";
+  }
+
+  /**
+   * Returns properties of element.
+   */
   static get properties() {
     return {
       href: { type: String }
     };
   }
+
+  /**
+  * Returns styles specifically related to this component
+  */
   static get styles() {
     return css`
       a {
@@ -17,11 +33,10 @@ export class NavLinkElement extends navigator(LitElement) {
       }
     `;
   }
-  constructor() {
-    super();
-    this.href = "";
-  }
   
+  /**
+   * Build component UI
+   */
   render() {
     return html`
       <a href="${this.href}" @click="${this.linkClick}">
@@ -30,6 +45,10 @@ export class NavLinkElement extends navigator(LitElement) {
     `;
   }
 
+  /**
+   * Event handler on link element
+   * @param {*} event Click event handler
+   */
   linkClick(event) {
     event.preventDefault();
     this.navigate(this.href);
