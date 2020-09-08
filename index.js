@@ -439,7 +439,7 @@ function Ge(t,e,i){if(!(this instanceof Ge)||We.has(this))throw new TypeError("c
     :host {
         --orange-bg-color: #FF6200;
     }
-`;const ui="AIzaSyDpv51Z_euYXkI42YRMsAZjJJzxFGVcNCI",di="v-galaxy::iyt-dialogue-api::1.x",pi="v-galaxy::route-data-resolver-api::1.x",fi="v-galaxy::basic-event-emitter-api::1.x",mi={home:{part:["snippet"],maxResults:20,safeSearch:"strict"},movies:{part:["snippet"],maxResults:20,q:"marvel's movies",safeSearch:"strict"},learning:{part:["snippet"],maxResults:20,q:"Litelement, Angular, React tutorial",safeSearch:"strict"},subscriptions:void 0,"not-found":void 0};customElements.define("fa-icon",class extends K{static get properties(){return{color:String,iClass:{attribute:"class"},src:String,style:String,size:String,pathPrefix:{attribute:"path-prefix"}}}static get styles(){return Y`
+`;const ui="AIzaSyDpUdcXp0dJh6BO9oi9yADMIRYzGecIMLk",di="v-galaxy::iyt-dialogue-api::1.x",pi="v-galaxy::route-data-resolver-api::1.x",fi="v-galaxy::basic-event-emitter-api::1.x",mi={home:{part:["snippet"],maxResults:20,safeSearch:"strict"},movies:{part:["snippet"],maxResults:20,q:"marvel's movies",safeSearch:"strict"},learning:{part:["snippet"],maxResults:20,q:"Litelement, Angular, React tutorial",safeSearch:"strict"},subscriptions:void 0,"not-found":void 0};customElements.define("fa-icon",class extends K{static get properties(){return{color:String,iClass:{attribute:"class"},src:String,style:String,size:String,pathPrefix:{attribute:"path-prefix"}}}static get styles(){return Y`
       :host {
         display: inline-block;
         padding: 0;
