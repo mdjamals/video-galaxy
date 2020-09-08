@@ -10,7 +10,7 @@ export default class SearchContentsElement extends LitElement {
     constructor() {
         super();
         this.eventEmitter = singletonManager.get(OBJECT_KEYS.Basic_Event_Emitter);
-        this.eventEmitter.subscribe('start-search', this.search);
+        this.eventEmitter.subscribe('start-search', this.search.bind(this));
         this.ytApi = singletonManager.get(OBJECT_KEYS.Youtube_Data_Api);
     }
 
@@ -45,7 +45,7 @@ export default class SearchContentsElement extends LitElement {
     /**
      * Search for video data and and update UI
      */
-    search = async  () => {
+    async search() {
         await this.requestData();
         this.requestUpdate();
     }

@@ -42,7 +42,7 @@ export default class BasicEventEmitter {
             this.events[eventName].forEach(function(fn) {
                 if(fn.constructor && fn.constructor.name === 'AsyncFunction') {
                     (
-                        async () => {
+                        async function() {
                             await fn(data);
                         }
                     )();
