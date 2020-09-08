@@ -20,7 +20,19 @@ suite('video grid element test', () => {
     test('video grid should render heading', async () => {
         const el = await fixture(html`<video-grid-element snippet='${JSON.stringify(mockVideoRes)}' heading='Movies'></video-grid-element>`);
         await el.updateComplete;
-        const heading = el.shadowRoot.querySelectorAll('.heading').innerText;
+        const heading = el.shadowRoot.querySelector('header').innerText;
         assert(heading === 'Movies');
+    });
+
+    test('video grid should able to error message in case of any failure', async () => {
+        const el = await fixture(html`<video-grid-element heading='Movies'></video-grid-element>`);
+        await el.updateComplete;
+        assert.shadowDom.equal(
+            el,
+            `<div class="no-search">
+            <h3 class="error">Something went wrong!</h3>
+            <small>Cause of error could be api key expired or internet connectivity!</small>
+        </div>`
+        );
     });
 });
