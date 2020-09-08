@@ -3,7 +3,7 @@ import {fixture, html} from '@open-wc/testing';
 
 const assert = chai.assert;
 suite('Logo test', () => {
-  test('is defined', () => {
+  test('Logo should be able to define', () => {
     const el = document.createElement('app-logo-element');
     assert.instanceOf(el, AppLogoElement);
   });
