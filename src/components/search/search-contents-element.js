@@ -40,7 +40,7 @@ export default class SearchContentsElement extends LitElement {
             "q": query,
             "safeSearch": "strict"
         }).catch(e => {
-            console.log('error => ', e);
+            
         });
     }
 
@@ -49,7 +49,7 @@ export default class SearchContentsElement extends LitElement {
      */
     async search() {
         await this.requestData().catch(e => {
-            console.log('error => ', e);
+            
         });
         this.requestUpdate();
     }
