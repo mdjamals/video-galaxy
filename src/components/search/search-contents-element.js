@@ -39,6 +39,8 @@ export default class SearchContentsElement extends LitElement {
             "maxResults": 20,
             "q": query,
             "safeSearch": "strict"
+        }).catch(e => {
+            console.log('error => ', e);
         });
     }
 
@@ -46,7 +48,9 @@ export default class SearchContentsElement extends LitElement {
      * Search for video data and and update UI
      */
     async search() {
-        await this.requestData();
+        await this.requestData().catch(e => {
+            console.log('error => ', e);
+        });
         this.requestUpdate();
     }
 

@@ -12,16 +12,20 @@ export default class YtDialogueApi {
      * Initialize google api client
      */
     initGoogleApi() {
-      gapi.load("client");
-      gapi.client.setApiKey(YT_API_CONFIG.apiKey);
+      if(typeof gapi !== 'undefined') {
+        gapi.load("client");
+        gapi.client.setApiKey(YT_API_CONFIG.apiKey);
+      }
     }
 
     /**
      * Api for communicating with youtube server
      */
     async loadYoutubeApi() {
-      if(!gapi.client.youtube) {
-        await gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest");
+      if(typeof gapi !== 'undefined' && navigator.onLine) {
+        let x = await gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest");
+      } else {
+        await new Promise(resolve => resolve(undefined));
       }
     }
 
@@ -38,6 +42,6 @@ export default class YtDialogueApi {
      */
     async loadContents(searchConfig) {
       await this.loadYoutubeApi();
-      return gapi.client.youtube.search.list(searchConfig);
+      return navigator.onLine ? gapi.client.youtube.search.list(searchConfig) : undefined;
     }
 }

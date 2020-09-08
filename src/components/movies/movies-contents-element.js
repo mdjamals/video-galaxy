@@ -28,7 +28,12 @@ export default class MoviesContentsElement extends LitElement {
      * Component lifecycle method
      */
     async connectedCallback() {
+        try {
         this.moviesData = await this.ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.movies);
+        }
+        catch {
+            this.requestUpdate();
+        }
         super.connectedCallback();
     }
 
@@ -36,7 +41,6 @@ export default class MoviesContentsElement extends LitElement {
      * Build component UI
      */
     render() {
-        console.log('render movies...', this.moviesData);
         return html`<video-grid-element snippet='${JSON.stringify(this.moviesData)}' heading='Movies'></video-grid-element>`;
     }
 }

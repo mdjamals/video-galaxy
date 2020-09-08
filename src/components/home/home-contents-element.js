@@ -23,6 +23,9 @@ export default class HomeContentsElement extends LitElement {
         };
     }
 
+    /**
+     * Returns styles used for component
+     */
     static get styles() {
         return css`
             :host {
@@ -31,14 +34,15 @@ export default class HomeContentsElement extends LitElement {
         `;
     } 
 
-
+    /**
+     * Lifecycle callback method
+     */
     async connectedCallback() {
         this.recommendedData = await this.ytApi.loadContents(DEFAULT_CONTENTS_PARAMS.home);
         super.connectedCallback();
     }
 
     render() {
-        console.log('render home...', this.recommendedData);
         return html`<video-grid-element snippet='${JSON.stringify(this.recommendedData)}' heading='Pick for you'></video-grid-element>`;
     }
 }
