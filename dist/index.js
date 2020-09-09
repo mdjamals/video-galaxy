@@ -577,8 +577,26 @@ function Ge(t,e,i){if(!(this instanceof Ge)||We.has(this))throw new TypeError("c
             .lion-search-btn {
                 margin-left: 10px;
                 cursor: pointer;
+                color: #fff;
             }
 
+            .lion-search-btn span{
+                margin-left: 5px;
+            }
+
+            .u-sr-only {
+                position: absolute;
+                top: 0;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip-path: inset(100%);
+                clip: rect(1px, 1px, 1px, 1px);
+                white-space: nowrap;
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
             @media screen and (max-height: 450px) {
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
@@ -589,14 +607,13 @@ function Ge(t,e,i){if(!(this instanceof Ge)||We.has(this))throw new TypeError("c
                     margin-left: 0px;
                     width: 100%;
                     margin-top: 10px;
+                    color: #fff;
                 }
 
                 .navbar-brand .title {
-                    font: 1.2em Impact;
                     text-decoration: none;
                     color: var(--orange-bg-color);
-                    margin-left: 1px;
-                    width: 60px;
+                    margin-left: 9px;
                 }
 
                 .logo {
@@ -647,9 +664,13 @@ function Ge(t,e,i){if(!(this instanceof Ge)||We.has(this))throw new TypeError("c
                     <app-logo-element class="logo"></app-logo-element>
                     <span class="title">Video Galaxy</span>
                 </a>
-                <lion-input id="searchInput" class="lion-input-search">
+                <lion-input id="searchInput" label="Type anything to search" class="lion-input-search">
+                    <label slot="label"><span class="u-sr-only">Type anything to search</span></label>
                     <div slot="suffix" class="lion-search-btn">
-                        <lion-button @click=${this.searchClick}><fa-icon class="fas fa-search icon" color="#ffffff" size="2em"></fa-icon></lion-button>
+                        <lion-button @click=${this.searchClick}>
+                            <fa-icon class="fas fa-search icon" color="#ffffff" size="1em"></fa-icon>
+                            <span>Search</span>
+                        </lion-button>
                     </div>
                 </lion-input>
             </nav>
@@ -760,7 +781,7 @@ const vi=(t,e)=>{const i=t.startNode.parentNode,s=void 0===e?t.endNode:e.startNo
             :host {
                 display: block;
             }
-        `}async requestData(){const t=new URLSearchParams(location.search).get("q");this.data=await this.ytApi.loadContents({part:["snippet"],maxResults:20,q:t,safeSearch:"strict"}).catch(t=>{console.log("error => ",t)})}async search(){await this.requestData().catch(t=>{console.log("error => ",t)}),this.requestUpdate()}async connectedCallback(){await this.requestData(),super.connectedCallback()}render(){return j`<video-grid-element snippet='${JSON.stringify(this.data)}' heading='Search'></video-grid-element>`}});customElements.define("learning-element",class extends K{constructor(){super(),this.ytApi=Pe.get(di)}static get styles(){return Y`
+        `}async requestData(){const t=new URLSearchParams(location.search).get("q");this.data=await this.ytApi.loadContents({part:["snippet"],maxResults:20,q:t,safeSearch:"strict"}).catch(t=>{})}async search(){await this.requestData().catch(t=>{}),this.requestUpdate()}async connectedCallback(){await this.requestData(),super.connectedCallback()}render(){return j`<video-grid-element snippet='${JSON.stringify(this.data)}' heading='Search'></video-grid-element>`}});customElements.define("learning-element",class extends K{constructor(){super(),this.ytApi=Pe.get(di)}static get styles(){return Y`
             :host {
                 display: block;
             }

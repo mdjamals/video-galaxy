@@ -17,7 +17,7 @@ This sample uses Karma, Chai, Mocha, and the open-wc test helpers for testing. S
 Tests can be run with the `test` script:
 
 ```bash
-npm test
+npm run test
 ```
 
 ## Dev Server

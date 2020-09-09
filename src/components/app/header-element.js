@@ -114,8 +114,26 @@ export default class HeaderElement extends navigator(LitElement) {
             .lion-search-btn {
                 margin-left: 10px;
                 cursor: pointer;
+                color: #fff;
             }
 
+            .lion-search-btn span{
+                margin-left: 5px;
+            }
+
+            .u-sr-only {
+                position: absolute;
+                top: 0;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip-path: inset(100%);
+                clip: rect(1px, 1px, 1px, 1px);
+                white-space: nowrap;
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
             @media screen and (max-height: 450px) {
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
@@ -126,14 +144,13 @@ export default class HeaderElement extends navigator(LitElement) {
                     margin-left: 0px;
                     width: 100%;
                     margin-top: 10px;
+                    color: #fff;
                 }
 
                 .navbar-brand .title {
-                    font: 1.2em Impact;
                     text-decoration: none;
                     color: var(--orange-bg-color);
-                    margin-left: 1px;
-                    width: 60px;
+                    margin-left: 9px;
                 }
 
                 .logo {
@@ -227,9 +244,13 @@ export default class HeaderElement extends navigator(LitElement) {
                     <app-logo-element class="logo"></app-logo-element>
                     <span class="title">Video Galaxy</span>
                 </a>
-                <lion-input id="searchInput" class="lion-input-search">
+                <lion-input id="searchInput" label="Type anything to search" class="lion-input-search">
+                    <label slot="label"><span class="u-sr-only">Type anything to search</span></label>
                     <div slot="suffix" class="lion-search-btn">
-                        <lion-button @click=${this.searchClick}><fa-icon class="fas fa-search icon" color="#ffffff" size="2em"></fa-icon></lion-button>
+                        <lion-button @click=${this.searchClick}>
+                            <fa-icon class="fas fa-search icon" color="#ffffff" size="1em"></fa-icon>
+                            <span>Search</span>
+                        </lion-button>
                     </div>
                 </lion-input>
             </nav>

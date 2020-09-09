@@ -2,9 +2,9 @@
  * Hold application keys
  */
 export const YT_API_CONFIG = {
-    apiKey: 'AIzaSyDpUdcXp0dJh6BO9oi9yADMIRYzGecIMLk' //primary account,
+   apiKey: 'AIzaSyDpUdcXp0dJh6BO9oi9yADMIRYzGecIMLk' //primary account,
     //apiKey: 'AIzaSyDOKFLGDPr5doznoTdwZkm_IXDaA6zWOBk', //primary  Project 2
-   //apiKey: 'AIzaSyDpv51Z_euYXkI42YRMsAZjJJzxFGVcNCI', //secondry account
+  // apiKey: 'AIzaSyDpv51Z_euYXkI42YRMsAZjJJzxFGVcNCI', //secondry account
   // apiKey: 'AIzaSyALeYaULBf-yujzg8wG6a6GyVxW59vQBu0' // secondry api key
 }
 
